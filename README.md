@@ -31,7 +31,7 @@ This section focuses on creating the basic structure of the web application.
 - **UV Index Section **: Implement a HTML page displaying the UV Index with a title, a paragraph (with an id for UV data), and space for a sun icon.
 - **Wind Speed Section **: Create a HTML page displaying wind speed with a title, a paragraph (with an id for wind data), and space for a gust of air icon.
 
-### Task 2: CSS (Cascading Style Sheets) (10%)
+### Task 2: CSS (Cascading Style Sheets) 
 
 This section involves styling the web application dynamically based on weather data.
 
