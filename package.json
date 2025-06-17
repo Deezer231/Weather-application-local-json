@@ -1,0 +1,15 @@
+{
+  "name": "weatherapplication-main",
+  "version": "1.0.0",
+  "description": "A simple weather application using the openweather API.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

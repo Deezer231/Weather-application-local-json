@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.clouds.min.js"></script>
+</head>
+<body id="vanta-bg">  
+    <header>
+        <h1>Weather Application</h1>
+        <nav>
+            <ul>
+                <li><a href="temperature.html">Temperature</a></li>
+                <li><a href="humidity.html">Humidity</a></li>
+                <li><a href="uv.html">UV Index</a></li>
+                <li><a href="wind.html">Wind Speed</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <input type="text" id="city-input" placeholder="Enter city name">
+        <button onclick="fetchWeatherData()">Get Weather</button>
+        <div id="weather-info"></div>
+    </main>
+    <script>
+    VANTA.CLOUDS({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: window.innerHeight,
+        minWidth: window.innerWidth
+    });
+
+    //Clears da stored data when page loads to prevent old city data from showing
+    window.addEventListener("load", () => {
+        localStorage.removeItem("weatherData");
+    });
+
+    async function fetchWeatherData() {
+        const city = document.getElementById("city-input").value.trim();
+        if (!city) {
+            alert("Please enter a city name.");
+            return;
+        }
+        try {
+            const response = await fetch("sample.json");
+            const data = await response.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                alert("Error: No valid data found in sample.json");
+                return;
+            }
+            const cityData = data.find(entry => entry.cityName.toLowerCase() === city.toLowerCase());
+            if (!cityData) {
+                alert(`No data found for ${city}.`);
+                return;
+            }
+            localStorage.setItem("weatherData", JSON.stringify(cityData));
+            updateWeatherUI(cityData);
+        } catch (error) {
+            console.error("Error loading weather data:", error);
+            alert("Failed to load weather data.");
+        }
+    }
+
+    function updateWeatherUI(weatherData) {
+        if (!weatherData) {
+            alert("No weather data available. Please search for a city first.");
+            return;
+        }
+        const weatherInfoDiv = document.getElementById("weather-info");
+        weatherInfoDiv.innerHTML = `
+            <h3>City: ${weatherData.cityName}</h3>
+            <p>Temperature: ${weatherData.temperatureCelsius}°C</p>
+            <p>Humidity: ${weatherData.humidity * 100}%</p>
+            <p>UV Index: ${weatherData.uvIndex}</p>
+            <p>Wind Speed: ${weatherData.windSpeed}</p>`;
+    }
+    </script>
+</body>
+</html>

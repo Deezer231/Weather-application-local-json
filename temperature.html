@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <body class="temperature-page">
+    <header>
+        <h1>Temperature</h1>
+    </header>
+    <main>
+        <!-- Step 2: Add the icon inside the <p> tag -->
+        <p id="temperature-data">
+            <i class="fas fa-thermometer-half"></i> Temperature: <span id="temp-value">Loading...</span>
+        </p>
+        <button onclick="toggleTemperature()">Toggle °C/°F</button>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherData = JSON.parse(localStorage.getItem("weatherData"));
+            const tempElement = document.getElementById("temp-value");
+            const iconElement = document.querySelector(".fa-thermometer-half");
+           
+           
+            if (weatherData && weatherData.temperatureCelsius !== undefined) {
+            let temp = weatherData.temperatureCelsius;
+            tempElement.innerText = `${temp}°C`;
+
+            if (temp => 20) {
+            iconElement.style.color = "yellow"; // Warm temperature
+        } else {
+            iconElement.style.color = "blue"; // Cool temperature
+        }
+    } else {
+        tempElement.innerText = "No data available. Please go back and search for a city.";
+        console.error("Error: No weather data found in localStorage.");
+    }
+});
+
+        function toggleTemperature() {
+            let tempElement = document.getElementById("temp-value");
+            if (!tempElement) return;
+
+            let tempText = tempElement.innerText;
+            let tempValue = parseFloat(tempText);
+
+            if (tempText.includes("°C")) {
+                tempElement.innerText = `${((tempValue * 9/5) + 32).toFixed(1)}°F`;
+            } else {
+                tempElement.innerText = `${((tempValue - 32) * 5/9).toFixed(1)}°C`;
+            }
+        }
+    </script>
+</body>
+</html>

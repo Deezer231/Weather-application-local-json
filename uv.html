@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UV Index</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="background-color: darkkhaki;">
+    <header>
+        <h1>UV Index</h1>
+    </header>
+    <main>
+        <p id="uv-data">
+            <i class="fa-solid fa-sun" id="uv-icon"></i> UV Index: <span id="uv-value">Loading...</span>
+        </p>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherData = JSON.parse(localStorage.getItem("weatherData"));
+            const uvElement = document.getElementById("uv-value");
+            const uvIcon = document.getElementById("uv-icon");
+
+            if (weatherData && weatherData.uvIndex !== undefined) {
+                let uvIndex = weatherData.uvIndex;
+                uvElement.innerText = `${uvIndex}`;
+                
+                if (uvIndex > 5) {
+                    uvIcon.style.color = "red"; // High UV
+                } else {
+                    uvIcon.style.color = "green"; // Safe UV
+                }
+            } else {
+                document.getElementById("uv-data").innerText = "No data available. Please go back and search for a city.";
+                console.error("Error: No weather data found in localStorage.");
+            }
+        });
+    </script>
+</body>
+</html>

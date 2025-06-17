@@ -1,0 +1,43 @@
+
+<!-- Updated wind.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind Speed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Wind Speed</h1>
+    </header>
+    <main>
+        <p id="wind-data">
+            <i class="fa-solid fa-wind" id="wind-icon"></i> Wind Speed: <span id="wind-value">Loading...</span>
+        </p>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherData = JSON.parse(localStorage.getItem("weatherData"));
+            const windElement = document.getElementById("wind-value");
+            const windIcon = document.getElementById("wind-icon");
+
+            if (weatherData && weatherData.windSpeed !== undefined) {
+                let windSpeed = weatherData.windSpeed;
+                windElement.innerText = `${windSpeed} km/h`;
+                
+                if (windSpeed > 20) {
+                    windIcon.style.color = "red"; // Strong wind
+                } else {
+                    windIcon.style.color = "blue"; // Calm wind
+                }
+            } else {
+                document.getElementById("wind-data").innerText = "No data available. Please go back and search for a city.";
+                console.error("Error: No weather data found in localStorage.");
+            }
+        });
+    </script>
+</body>
+</html>
