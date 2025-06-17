@@ -46,6 +46,7 @@ This section focuses on implementing functionality using JavaScript, including f
 
 #### Requirements:
 
-- **JSON Data Integration **: Upon user input (city search), fetch weather data from a local JSON file using the Fetch API. Parse the received data and update the respective elements (Temperature, Humidity, UV Index, Wind Speed) with data from the input city accordingly.
+- **JSON Data Integration **: Upon user input (city search), fetch weather data from a local JSON file using the Fetch API.
+- Parse the received data and update the respective elements (Temperature, Humidity, UV Index, Wind Speed) with data from the input city accordingly.
 - **Style Updates **: Dynamically adjust the color of icons within each section based on weather conditions. For example, if the temperature exceeds 20°C, the temperature icon should turn yellow; otherwise, it should remain blue.
 - Apply similar color adjustments for wind speed, humidity, and UV (you can choose the threshold).
