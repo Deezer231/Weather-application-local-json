@@ -7,7 +7,7 @@ Lab 2 for CS230
 
 ## Introduction
 
--The objective of this project was to develop a web application that retrieves weather data from a local JSON file(sample.json) and dynamically updates the page content based on the received information. 
+The objective of this project was to develop a web application that retrieves weather data from a local JSON file(sample.json) and dynamically updates the page content based on the received information. 
  Users can input their location (city name), and the application will display relevant weather forecast details such as temperature, humidity, UV index, wind speed, etc.
 
 ## Objective
